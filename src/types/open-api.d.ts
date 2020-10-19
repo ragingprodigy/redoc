@@ -5,6 +5,7 @@ export interface OpenAPISpec {
   info: OpenAPIInfo;
   servers?: OpenAPIServer[];
   paths: OpenAPIPaths;
+  channels?: OpenAPIChannels;
   components?: OpenAPIComponents;
   security?: OpenAPISecurityRequirement[];
   tags?: OpenAPITag[];
@@ -34,6 +35,10 @@ export interface OpenAPIServerVariable {
   description?: string;
 }
 
+export interface OpenAPIChannels {
+  [channel: string]: OpenAPIChannel;
+}
+
 export interface OpenAPIPaths {
   [path: string]: OpenAPIPath;
 }
@@ -56,6 +61,27 @@ export interface OpenAPIPath {
   trace?: OpenAPIOperation;
   servers?: OpenAPIServer[];
   parameters?: Array<Referenced<OpenAPIParameter>>;
+}
+
+export interface OpenAPIChannel {
+  description?: string;
+  publish?: OpenAPIChannelOperation;
+  subscribe?: OpenAPISubscribeOperation;
+}
+
+export interface OpenAPIChannelOperation {
+  description?: string;
+  summary?: string;
+  externalDocs?: OpenAPIExternalDocumentation;
+  message?: OpenAPIMessage;
+}
+
+export interface OpenAPISubscribeOperation extends OpenAPIChannelOperation {
+  response?: OpenAPIAsyncResponse;
+}
+
+export interface OpenAPIAsyncResponse {
+  content?: { [mime: string]: OpenAPIMediaType };
 }
 
 export interface OpenAPIXCodeSample {
@@ -201,16 +227,27 @@ export interface OpenAPICallback {
   [name: string]: OpenAPIPath;
 }
 
+export interface OpenAPIMessage {
+  description?: string;
+  externalDocs?: OpenAPIExternalDocumentation;
+  name?: string;
+  payload?: OpenAPISchema;
+  summary?: string;
+  tags?: string[];
+  title?: string;
+}
+
 export interface OpenAPIComponents {
-  schemas?: { [name: string]: Referenced<OpenAPISchema> };
-  responses?: { [name: string]: Referenced<OpenAPIResponse> };
-  parameters?: { [name: string]: Referenced<OpenAPIParameter> };
-  examples?: { [name: string]: Referenced<OpenAPIExample> };
-  requestBodies?: { [name: string]: Referenced<OpenAPIRequestBody> };
-  headers?: { [name: string]: Referenced<OpenAPIHeader> };
-  securitySchemes?: { [name: string]: Referenced<OpenAPISecurityScheme> };
-  links?: { [name: string]: Referenced<OpenAPILink> };
   callbacks?: { [name: string]: Referenced<OpenAPICallback> };
+  examples?: { [name: string]: Referenced<OpenAPIExample> };
+  headers?: { [name: string]: Referenced<OpenAPIHeader> };
+  links?: { [name: string]: Referenced<OpenAPILink> };
+  messages?: { [name: string]: Referenced<OpenAPIMessage> };
+  parameters?: { [name: string]: Referenced<OpenAPIParameter> };
+  requestBodies?: { [name: string]: Referenced<OpenAPIRequestBody> };
+  responses?: { [name: string]: Referenced<OpenAPIResponse> };
+  schemas?: { [name: string]: Referenced<OpenAPISchema> };
+  securitySchemes?: { [name: string]: Referenced<OpenAPISecurityScheme> };
 }
 
 export interface OpenAPISecurityRequirement {
