@@ -19,7 +19,7 @@ const demos = [
 const DEFAULT_SPEC = 'openapi.yaml';
 
 class DemoApp extends React.Component<
-  {},
+  any,
   { specUrl: string; dropdownOpen: boolean; cors: boolean }
 > {
   constructor(props) {
