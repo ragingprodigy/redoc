@@ -37,6 +37,9 @@ export class Redoc extends React.Component<RedocProps> {
       store: { spec, menu, options, search, marker },
     } = this.props;
     const store = this.props.store;
+
+    console.log("the store", store);
+
     return (
       <ThemeProvider theme={options.theme}>
         <StoreProvider value={this.props.store}>

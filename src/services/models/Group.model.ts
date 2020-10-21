@@ -1,10 +1,10 @@
-import { action, observable, makeObservable } from 'mobx';
-
+import { action, makeObservable, observable } from 'mobx';
 import { OpenAPIExternalDocumentation, OpenAPITag } from '../../types';
 import { safeSlugify } from '../../utils';
 import { MarkdownHeading, MarkdownRenderer } from '../MarkdownRenderer';
 import { ContentItemModel } from '../MenuBuilder';
 import { IMenuItem, MenuItemGroupType } from '../MenuStore';
+
 
 /**
  * Operations Group model ready to be used by components

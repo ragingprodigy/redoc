@@ -6,7 +6,7 @@ servers:
     description: Sandbox server
 info:
   description: |
-    This is a sample server Petstore server.
+    This is a sample server Petstore server XI.
     You can find out more about Swagger at
     [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).
     For this sample, you can use the api key `special-key` to test the authorization filters.
@@ -63,6 +63,12 @@ tags:
     description: Access to Petstore orders
   - name: user
     description: Operations about user
+  - name: ws_auth
+    x-displayName: WS Auth
+    description: Web Socket Authentication
+  - name: ws_orders
+    x-displayName: WS Orders
+    description: Order management
   - name: pet_model
     x-displayName: The Pet Model
     description: |
@@ -79,6 +85,10 @@ x-tagGroups:
   - name: User Management
     tags:
       - user
+  - name: Web Socket
+    tags:
+      - ws_auth
+      - ws_orders
   - name: Models
     tags:
       - pet_model
@@ -1193,7 +1203,7 @@ x-webhooks:
       summary: New pet
       description: Information about a new pet in the systems
       operationId: newPet
-      tags: 
+      tags:
         - pet
       requestBody:
         content:
